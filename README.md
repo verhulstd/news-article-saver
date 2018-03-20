@@ -1,9 +1,8 @@
-# Projectname
+# News Article Saver
 
-Some project description
+Application to search for article and save them to a reading list
 
-  - Some nice features
-  - Some other nice feature
-  - ...
- 
+* Search news-article
+* Save them for future-reading
+
 [comment]: <> ( Learn more about the MarkDown file format on https://dillinger.io/)
