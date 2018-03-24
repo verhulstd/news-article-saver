@@ -29,14 +29,19 @@ export default class SearchComponent {
   handleFormSubmit(e) {
     e.preventDefault();
     const value = this.form.querySelector("input[type=text]").value;
-
+    this.searchResults.innerHTML = "";
     axios
       .get(
-        "https://nieuws.vtm.be/feed/articles/solr?format=json&query=" + value
+        "https://nieuws.vtm.be/feed/articles/solr?format=json&query=" +
+          value.replace(" ", ",")
       )
       .then(response => {
         for (const item of response.data.response.items) {
-          const searchListItem = new SearchListItem(item, this.searchResults);
+          const searchListItem = new SearchListItem(
+            item,
+            this.searchResults,
+            this.savedArticles
+          );
         }
       })
       .catch(function(error) {
