@@ -1,10 +1,12 @@
-import saveComponent from "./components/SaveComponent.js";
+import SaveComponent from "./components/SaveComponent.js";
+import SearchComponent from "./components/SearchComponent.js";
 
 const savedArticles = [];
-const searchSection = document.getElementById("searchSection");
 const saveSection = document.getElementById("saveSection");
-const saveComponent = new saveComponent(
-  saveSection,
+const searchSection = document.getElementById("searchSection");
+const saveComponent = new SaveComponent(saveSection, savedArticles);
+const searchComponent = new SearchComponent(
+  searchSection,
   savedArticles,
-  fireBaseRef
+  saveComponent
 );
