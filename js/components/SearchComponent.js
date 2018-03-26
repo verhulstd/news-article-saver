@@ -1,10 +1,12 @@
 import axios from "axios";
 import SearchListItem from "./SearchListItem";
+import SavedListItem from "./SavedListItem";
 
 export default class SearchComponent {
-  constructor(searchSection, savedArticles, saveComponent) {
+  constructor(searchSection, savedArticles, firebase, saveComponent) {
     this.searchSection = searchSection;
     this.savedArticles = savedArticles;
+    this.firebase = firebase;
     this.saveComponent = saveComponent;
     this.form;
     this.searchResults;
@@ -25,6 +27,10 @@ export default class SearchComponent {
   }
   setUpEvents() {
     this.form.addEventListener("submit", this.handleFormSubmit.bind(this));
+    this.searchResults.addEventListener(
+      "click",
+      this.handleListItemClick.bind(this)
+    );
   }
   handleFormSubmit(e) {
     e.preventDefault();
@@ -47,5 +53,33 @@ export default class SearchComponent {
       .catch(function(error) {
         console.log(error);
       });
+  }
+  handleListItemClick(e) {
+    //id to work with
+    const id = e.target.parentElement.dataset.id;
+    if (e.target.nodeName == "A") {
+      if (e.target.classList.contains("checked")) {
+        //add to array
+        this.savedArticles.push(parseInt(id));
+        //add to DOM
+        var savedListItem = new SavedListItem(
+          id,
+          this.saveComponent.listHolder
+        );
+        //add to DB
+        this.firebase
+          .database()
+          .ref("articles")
+          .set(this.savedArticles);
+      } else {
+        //click on remove icon from saved id
+        document
+          .getElementById(`saved-${id}`)
+          .querySelector("a")
+          .click();
+      }
+    }
+    if (e.target.nodeName == "LI") {
+    }
   }
 }

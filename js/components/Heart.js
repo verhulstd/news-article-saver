@@ -9,13 +9,13 @@ export default class Heart {
     const html = `
             <a class="heart"></a>
         `;
-    this.list.insertAdjacentHTML("beforeend", html);
+    this.holder.insertAdjacentHTML("beforeend", html);
     if (this.status) {
-      this.list.querySelector("a").classList.add("checked");
+      this.holder.querySelector("a").classList.add("checked");
     }
   }
   setUpEvents() {
-    this.list
+    this.holder
       .querySelector("a")
       .addEventListener("click", this.handleClick.bind(this));
   }

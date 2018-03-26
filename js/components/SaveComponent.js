@@ -1,16 +1,16 @@
-import * as firebase from "firebase";
 import SavedListItem from "./SavedListItem";
 import axios from "axios";
 
 var popupS = require("popups");
 
 export default class SaveComponent {
-  constructor(saveSection, savedArticles) {
+  constructor(saveSection, savedArticles, firebase) {
     this.saveSection = saveSection;
     this.savedArticles = savedArticles;
+    this.firebase = firebase;
     this.listHolder = "";
     this.generateHtml();
-    this.initFirebase();
+    this.loadFirebase();
     this.setUpEvents();
   }
   generateHtml() {
@@ -21,17 +21,8 @@ export default class SaveComponent {
     this.saveSection.insertAdjacentHTML("beforeend", html);
     this.listHolder = document.getElementById("saved_articles");
   }
-  initFirebase() {
-    var config = {
-      apiKey: "AIzaSyArVEG_eppVPiMSFoG4APql9zYm6IYQczQ",
-      authDomain: "squarebuilder-2dd65.firebaseapp.com",
-      databaseURL: "https://squarebuilder-2dd65.firebaseio.com",
-      projectId: "squarebuilder-2dd65",
-      storageBucket: "squarebuilder-2dd65.appspot.com",
-      messagingSenderId: "14989606875"
-    };
-    firebase.initializeApp(config);
-    var data = firebase.database().ref("articles");
+  loadFirebase() {
+    var data = this.firebase.database().ref("articles");
     data.once("value", snapshot => {
       var returnedObject = snapshot.val();
       for (const prop in returnedObject) {
@@ -52,8 +43,9 @@ export default class SaveComponent {
       this.savedArticles = this.savedArticles.filter(
         el => el != list.dataset.id
       );
+      console.log("updated array ==> " + this.savedArticles);
       list.remove();
-      firebase
+      this.firebase
         .database()
         .ref("articles")
         .set(this.savedArticles);

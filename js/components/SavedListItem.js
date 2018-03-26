@@ -16,7 +16,7 @@ export default class SavedListItem {
   }
   addListItem(item) {
     const html = `
-            <li data-id="${item.id}">
+            <li id="saved-${item.id}" data-id="${item.id}">
                 ${item.title} - ${item.id} - <a>X</a>
             </li>
         `;

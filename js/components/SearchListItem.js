@@ -6,12 +6,15 @@ export default class SearchListItem {
     this.searchResults = searchResults;
     this.savedArticles = savedArticles;
     this.list = "";
+    this.heart = "";
     this.generateHtml();
   }
   generateHtml() {
     const html = `
-        <li id="search-${this.item.fields.entity_id}">
-            <span>${this.item.title}</span>
+        <li id="search-${this.item.fields.entity_id}" data-id="${
+      this.item.fields.entity_id
+    }">
+            ${this.item.title} - ${this.item.fields.entity_id}
         </li>
       `;
     this.searchResults.insertAdjacentHTML("beforeend", html);
@@ -19,7 +22,10 @@ export default class SearchListItem {
       `#search-${this.item.fields.entity_id}`
     );
     var saved = this.inArray(this.item.fields.entity_id, this.savedArticles);
-    var heart = new Heart(saved, this.list, this.savedArticles);
+    console.log("--------------------");
+    console.log(this.savedArticles);
+    console.log("--------------------");
+    this.heart = new Heart(saved, this.list);
   }
   inArray(needle, haystack) {
     var count = haystack.length;
