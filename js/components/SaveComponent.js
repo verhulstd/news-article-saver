@@ -40,16 +40,12 @@ export default class SaveComponent {
   handleClick(e) {
     if (e.target.nodeName == "A") {
       const list = e.target.parentElement;
-      console.log(this.savedArticles);
-      const positionToRemove = this.savedArticles.indexOf(
-        parseInt(list.dataset.id)
-      );
-      console.log("position to remove: " + positionToRemove);
+      const id = parseInt(list.dataset.id);
+      const positionToRemove = this.savedArticles.indexOf(id);
       this.savedArticles.splice(positionToRemove, 1);
-      console.log(this.savedArticles);
       /*
       Cannot use filter => creates new location in memory!
-      
+
       this.savedArticles = this.savedArticles.filter(
         el => el != list.dataset.id
       );
@@ -60,6 +56,12 @@ export default class SaveComponent {
         .database()
         .ref("articles")
         .set(this.savedArticles);
+      //if a heart component with same id stille is red => remove checked class from heart
+      if (document.querySelector("li#search-" + id + " a.heart.checked")) {
+        document
+          .querySelector("li#search-" + id + " a.heart.checked")
+          .classList.remove("checked");
+      }
     }
     if (e.target.nodeName == "LI") {
       const id = e.target.dataset.id;
