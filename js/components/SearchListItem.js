@@ -22,9 +22,6 @@ export default class SearchListItem {
       `#search-${this.item.fields.entity_id}`
     );
     var saved = this.inArray(this.item.fields.entity_id, this.savedArticles);
-    console.log("--------------------");
-    console.log(this.savedArticles);
-    console.log("--------------------");
     this.heart = new Heart(saved, this.list);
   }
   inArray(needle, haystack) {

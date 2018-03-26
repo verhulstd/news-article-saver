@@ -40,10 +40,21 @@ export default class SaveComponent {
   handleClick(e) {
     if (e.target.nodeName == "A") {
       const list = e.target.parentElement;
+      console.log(this.savedArticles);
+      const positionToRemove = this.savedArticles.indexOf(
+        parseInt(list.dataset.id)
+      );
+      console.log("position to remove: " + positionToRemove);
+      this.savedArticles.splice(positionToRemove, 1);
+      console.log(this.savedArticles);
+      /*
+      Cannot use filter => creates new location in memory!
+      
       this.savedArticles = this.savedArticles.filter(
         el => el != list.dataset.id
       );
-      console.log("updated array ==> " + this.savedArticles);
+      */
+      //console.log("updated array ==> " + this.savedArticles);
       list.remove();
       this.firebase
         .database()
