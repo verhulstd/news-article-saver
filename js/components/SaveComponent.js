@@ -1,3 +1,12 @@
+/**
+ * Load and show firebase data (saved articles)
+ * @class SaveComponent
+ * @classdesc This component creates a list, contacts Firebase and loads up the listitems in the list.
+ * @constructor
+ * @param  {HTMLElement} saveSection HtmlElement referencing the section where the list needs to be created
+ * @param  {Array} savedArticles reference to the array containing all the saved articles
+ * @param  {Object} firebase reference to the firebase object
+ */
 import SavedListItem from "./SavedListItem";
 import axios from "axios";
 
@@ -13,6 +22,10 @@ export default class SaveComponent {
     this.loadFirebase();
     this.setUpEvents();
   }
+
+  /**
+   *  @function generateHtml - Function to create h1 and Ul
+   */
   generateHtml() {
     const html = `
             <h1>Saved Articles</h1>

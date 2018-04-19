@@ -1,3 +1,15 @@
+/**
+ * Application that query the VTM nieuws API. It has the ability to save newsarticles for later use.
+ * It uses a Google firebase database to save these articles
+ * @author David Verhulst
+ * @requires module:firebase
+ */
+
+/**
+ * @license
+ * Copyright (c) 2018 Meraki Academy
+ */
+
 import SaveComponent from "./components/SaveComponent.js";
 import SearchComponent from "./components/SearchComponent.js";
 import * as firebase from "firebase";

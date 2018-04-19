@@ -2,18 +2,20 @@
   "name": "news-article-saver",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "dev": "parcel index.html --open",
     "prod": "parcel build index.html -d build --public-url ./",
-    "deploy": "firebase deploy"
+    "deploy": "firebase deploy",
+    "docs": "node_modules/.bin/jsdoc --configure jsdoc.conf.json"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "David Verhulst",
+  "license": "Meraki :-)",
   "dependencies": {
     "axios": "^0.18.0",
     "firebase": "^4.11.0",
+    "minami": "^1.2.3",
     "npm": "^5.7.1",
     "popups": "^1.1.3"
   },

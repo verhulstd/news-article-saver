@@ -1,0 +1,16 @@
+{
+  "source": {
+    "include": ["./js/main.js", "./js/components/SaveComponent.js"]
+  },
+  "opts": {
+    "destination": "./docs",
+    "template": "./node_modules/minami"
+  },
+  "templates": {
+    "default": {
+      "outputSourceFiles": false,
+      "useLongnameInNav": true
+    },
+    "useLongnameInNav": true
+  }
+}
